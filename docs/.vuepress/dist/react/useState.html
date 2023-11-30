@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>useState</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="">
+    
+    <link rel="preload" href="/assets/css/0.styles.7b36eabc.css" as="style"><link rel="preload" href="/assets/js/app.91780537.js" as="script"><link rel="preload" href="/assets/js/2.f70e48b2.js" as="script"><link rel="preload" href="/assets/js/22.3d39bd35.js" as="script"><link rel="prefetch" href="/assets/js/10.f6b1a0da.js"><link rel="prefetch" href="/assets/js/11.4e164f96.js"><link rel="prefetch" href="/assets/js/12.ffd7221e.js"><link rel="prefetch" href="/assets/js/13.b5ca6aca.js"><link rel="prefetch" href="/assets/js/14.aa931e1a.js"><link rel="prefetch" href="/assets/js/15.239e276f.js"><link rel="prefetch" href="/assets/js/16.84170c7f.js"><link rel="prefetch" href="/assets/js/17.c3e6e487.js"><link rel="prefetch" href="/assets/js/18.df3d02c1.js"><link rel="prefetch" href="/assets/js/19.7c5d58ac.js"><link rel="prefetch" href="/assets/js/20.45e3f97a.js"><link rel="prefetch" href="/assets/js/21.69c419c8.js"><link rel="prefetch" href="/assets/js/23.85fa1c40.js"><link rel="prefetch" href="/assets/js/24.95f75d81.js"><link rel="prefetch" href="/assets/js/25.f8d6e0c5.js"><link rel="prefetch" href="/assets/js/26.f268d4d1.js"><link rel="prefetch" href="/assets/js/27.abb292df.js"><link rel="prefetch" href="/assets/js/3.1f7c1ef3.js"><link rel="prefetch" href="/assets/js/4.bd52c4e3.js"><link rel="prefetch" href="/assets/js/5.530b0be1.js"><link rel="prefetch" href="/assets/js/6.dc32384f.js"><link rel="prefetch" href="/assets/js/7.e82e331d.js"><link rel="prefetch" href="/assets/js/8.5d832cc1.js"><link rel="prefetch" href="/assets/js/9.9d6249f4.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7b36eabc.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="usestate"><a href="#usestate" class="header-anchor">#</a> useState</h1> <p>useState是一个react hook函数，允许我们向组件添加一个状态变量，从而控制影响组件的渲染结果，与普通js变量不同的是，状态变量一旦发生变化，组件的UI视图也会跟着变化 数据驱动视图</p> <p>useState是一个函数，返回值是一个数组
+数组中第一个参数是状态变量，第二个参数是set函数用来修改状态变量
+useState括号中参数将作为状态的初始值</p> <ol><li>写法</li></ol> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">const</span> <span class="token punctuation">[</span>count <span class="token punctuation">,</span>setCount<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token keyword">function</span> <span class="token function">handleClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token function">setCount</span><span class="token punctuation">(</span>count<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span>
+        <span class="token operator">&lt;</span>div onClick<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token function">handleClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="2"><li>状态不可变</li></ol> <p>在react当中，状态被认为是只读的，我们应该始终替换它而不是修改它，直接修改他不会引发视图更新，下面例子：</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">const</span> <span class="token punctuation">[</span>count <span class="token punctuation">,</span>setCount<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token keyword">function</span> <span class="token function">handleClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token comment">/**直接修改 无法引发视图更新 */</span>
+   count<span class="token operator">++</span>；
+   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>count<span class="token punctuation">)</span>
+
+   <span class="token comment">/**
+   *用传入的新值修改count
+   *重新使用新的count渲染UI
+    */</span>
+   <span class="token function">setCount</span><span class="token punctuation">(</span>count<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span>
+        <span class="token operator">&lt;</span>div onClick<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token function">handleClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="3"><li>修改对象状态</li></ol> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">const</span> <span class="token punctuation">[</span>form <span class="token punctuation">,</span>setForm<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">'jack'</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">function</span> <span class="token function">handleClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token comment">/**直接修改 无法引发视图更新 */</span>
+   form<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'zhangsan'</span>
+   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>form<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+
+   <span class="token comment">/**
+   *用传入的新值修改name属性
+   *重新使用新的name属性渲染UI
+    */</span>
+   <span class="token function">setCount</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token operator">...</span>form<span class="token punctuation">,</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">'wangwu'</span>
+   <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span>
+        <span class="token operator">&lt;</span>div onClick<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token function">handleClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">{</span>form<span class="token punctuation">.</span>name<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="4"><li>修改数组状态</li></ol> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">const</span> <span class="token punctuation">[</span>list <span class="token punctuation">,</span>setList<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">'zhangsan'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">age</span><span class="token operator">:</span><span class="token number">14</span>
+<span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">function</span> <span class="token function">handleClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token comment">/**直接修改 无法引发视图更新 */</span>
+   list<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span> 
+    <span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">'wangwu'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">age</span><span class="token operator">:</span><span class="token number">14</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>list<span class="token punctuation">)</span>
+
+   <span class="token comment">/**
+   *用传入的新值修改name属性
+   *重新使用新的name属性渲染UI
+    */</span>
+   <span class="token function">setList</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+    <span class="token operator">...</span>list<span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> 
+        <span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">'wangwu'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">age</span><span class="token operator">:</span><span class="token number">14</span>
+    <span class="token punctuation">}</span>
+   <span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span>
+        <span class="token operator">&lt;</span>div onClick<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token function">handleClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">{</span>form<span class="token punctuation">.</span>name<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</p> <p>生成两个文件
+.ssh/id_rsa
+.ssh/id_rsa.pub</p> <p>然后，你需要将你的公钥添加到你的GitHub账户的SSH密钥部分。这通常可以在账户设置的SSH和GPG密钥部分找到。</p> <p>通过 cat ~/.ssh/id_rsa.pub 命令找到公钥</p> <p>cat ~/.ssh/id_rsa.pub</p> <p>复制内容到github上</p> <p>本地执行下面命令，确保ssh-agent在后台运行，并将你的私钥添加到ssh-agent
+eval &quot;$(ssh-agent -s)&quot;
+ssh-add ~/.ssh/id_rsa</p> <p>现在，你应该能够使用SSH方式连接到GitHub了。你可以通过尝试克隆一个仓库来测试你的SSH连接。</p> <p>git clone git@github.com:username/repo.git</p> <p>git add .</p> <p>git commit -m &quot;&quot;</p> <p>git branch -u master</p> <p>git push -u origin master</p></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.91780537.js" defer></script><script src="/assets/js/2.f70e48b2.js" defer></script><script src="/assets/js/22.3d39bd35.js" defer></script>
+  </body>
+</html>

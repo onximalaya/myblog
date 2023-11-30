@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>组件暴露useImperativeHandle和forwardRef</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="">
+    
+    <link rel="preload" href="/assets/css/0.styles.7b36eabc.css" as="style"><link rel="preload" href="/assets/js/app.91780537.js" as="script"><link rel="preload" href="/assets/js/2.f70e48b2.js" as="script"><link rel="preload" href="/assets/js/25.f8d6e0c5.js" as="script"><link rel="prefetch" href="/assets/js/10.f6b1a0da.js"><link rel="prefetch" href="/assets/js/11.4e164f96.js"><link rel="prefetch" href="/assets/js/12.ffd7221e.js"><link rel="prefetch" href="/assets/js/13.b5ca6aca.js"><link rel="prefetch" href="/assets/js/14.aa931e1a.js"><link rel="prefetch" href="/assets/js/15.239e276f.js"><link rel="prefetch" href="/assets/js/16.84170c7f.js"><link rel="prefetch" href="/assets/js/17.c3e6e487.js"><link rel="prefetch" href="/assets/js/18.df3d02c1.js"><link rel="prefetch" href="/assets/js/19.7c5d58ac.js"><link rel="prefetch" href="/assets/js/20.45e3f97a.js"><link rel="prefetch" href="/assets/js/21.69c419c8.js"><link rel="prefetch" href="/assets/js/22.3d39bd35.js"><link rel="prefetch" href="/assets/js/23.85fa1c40.js"><link rel="prefetch" href="/assets/js/24.95f75d81.js"><link rel="prefetch" href="/assets/js/26.f268d4d1.js"><link rel="prefetch" href="/assets/js/27.abb292df.js"><link rel="prefetch" href="/assets/js/3.1f7c1ef3.js"><link rel="prefetch" href="/assets/js/4.bd52c4e3.js"><link rel="prefetch" href="/assets/js/5.530b0be1.js"><link rel="prefetch" href="/assets/js/6.dc32384f.js"><link rel="prefetch" href="/assets/js/7.e82e331d.js"><link rel="prefetch" href="/assets/js/8.5d832cc1.js"><link rel="prefetch" href="/assets/js/9.9d6249f4.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7b36eabc.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="react-forwardref"><a href="#react-forwardref" class="header-anchor">#</a> React.forwardRef</h1> <p>使用ref暴露Dom节点给父组件</p> <p>场景：一个父组件包裹着一个子组件，父组件通过ref获取子组件内部的input元素让其聚焦</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">//子组件</span>
+<span class="token keyword">const</span> Input <span class="token operator">=</span> <span class="token function">forwardRef</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">props<span class="token punctuation">,</span>ref</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">&lt;</span>Input type<span class="token operator">=</span><span class="token string">'text'</span> ref<span class="token operator">=</span><span class="token punctuation">{</span>ref<span class="token punctuation">}</span><span class="token operator">/</span><span class="token operator">&gt;</span> 
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token comment">//父组件</span>
+<span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">const</span> InputRef <span class="token operator">=</span> <span class="token function">useRef</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+    <span class="token keyword">const</span> <span class="token function-variable function">handleClick</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>InputRef<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//让子组件聚焦</span>
+        InputRef<span class="token punctuation">.</span>current<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span>
+        <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span>Input ref<span class="token operator">=</span><span class="token punctuation">{</span>InputRef<span class="token punctuation">}</span><span class="token operator">/</span><span class="token operator">&gt;</span>  
+            <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span>handleClick<span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h1 id="useimperativehandle"><a href="#useimperativehandle" class="header-anchor">#</a> useImperativeHandle</h1> <p>说明：通过ref暴露子组件中的方法</p> <p>场景：一个父组件包裹着一个子组件，父组件通过调用子组件内部的focus方法实现聚焦</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">//子组件</span>
+<span class="token keyword">const</span> Input <span class="token operator">=</span> <span class="token function">forwardRef</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">props<span class="token punctuation">,</span>ref</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+    <span class="token keyword">const</span> inputRef <span class="token operator">=</span> <span class="token function">useRef</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//实现聚焦的函数</span>
+    <span class="token keyword">const</span> <span class="token function-variable function">focusHandle</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        inputRef<span class="token punctuation">.</span>current<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//暴露函数给父组件调用</span>
+    <span class="token function">useImperativeHandle</span><span class="token punctuation">(</span>ref<span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            <span class="token comment">//暴露的方法</span>
+            focusHandle
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token operator">&lt;</span>Input type<span class="token operator">=</span><span class="token string">'text'</span> ref<span class="token operator">=</span><span class="token punctuation">{</span>inputRef<span class="token punctuation">}</span><span class="token operator">/</span><span class="token operator">&gt;</span> 
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token comment">//父组件</span>
+<span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">const</span> SonRef <span class="token operator">=</span> <span class="token function">useRef</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+    
+    <span class="token keyword">const</span> <span class="token function-variable function">focusHandle</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>SonRef<span class="token punctuation">.</span>current<span class="token punctuation">)</span>
+        SonRef<span class="token punctuation">.</span>current<span class="token punctuation">.</span><span class="token function">focusHandle</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span>
+        <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span>Input ref<span class="token operator">=</span><span class="token punctuation">{</span>SonRef<span class="token punctuation">}</span><span class="token operator">/</span><span class="token operator">&gt;</span>  
+            <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span>focusHandle<span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.91780537.js" defer></script><script src="/assets/js/2.f70e48b2.js" defer></script><script src="/assets/js/25.f8d6e0c5.js" defer></script>
+  </body>
+</html>

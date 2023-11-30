@@ -142,3 +142,12 @@ ssh-add ~/.ssh/id_rsa
 
 
 git clone git@github.com:username/repo.git
+
+
+git add .
+ 
+git commit -m ""
+
+git branch -u master
+
+git push -u origin master

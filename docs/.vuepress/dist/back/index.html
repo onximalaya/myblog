@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>EXPRESS 结构设计</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="">
+    
+    <link rel="preload" href="/assets/css/0.styles.7b36eabc.css" as="style"><link rel="preload" href="/assets/js/app.91780537.js" as="script"><link rel="preload" href="/assets/js/2.f70e48b2.js" as="script"><link rel="preload" href="/assets/js/7.e82e331d.js" as="script"><link rel="prefetch" href="/assets/js/10.f6b1a0da.js"><link rel="prefetch" href="/assets/js/11.4e164f96.js"><link rel="prefetch" href="/assets/js/12.ffd7221e.js"><link rel="prefetch" href="/assets/js/13.b5ca6aca.js"><link rel="prefetch" href="/assets/js/14.aa931e1a.js"><link rel="prefetch" href="/assets/js/15.239e276f.js"><link rel="prefetch" href="/assets/js/16.84170c7f.js"><link rel="prefetch" href="/assets/js/17.c3e6e487.js"><link rel="prefetch" href="/assets/js/18.df3d02c1.js"><link rel="prefetch" href="/assets/js/19.7c5d58ac.js"><link rel="prefetch" href="/assets/js/20.45e3f97a.js"><link rel="prefetch" href="/assets/js/21.69c419c8.js"><link rel="prefetch" href="/assets/js/22.3d39bd35.js"><link rel="prefetch" href="/assets/js/23.85fa1c40.js"><link rel="prefetch" href="/assets/js/24.95f75d81.js"><link rel="prefetch" href="/assets/js/25.f8d6e0c5.js"><link rel="prefetch" href="/assets/js/26.f268d4d1.js"><link rel="prefetch" href="/assets/js/27.abb292df.js"><link rel="prefetch" href="/assets/js/3.1f7c1ef3.js"><link rel="prefetch" href="/assets/js/4.bd52c4e3.js"><link rel="prefetch" href="/assets/js/5.530b0be1.js"><link rel="prefetch" href="/assets/js/6.dc32384f.js"><link rel="prefetch" href="/assets/js/8.5d832cc1.js"><link rel="prefetch" href="/assets/js/9.9d6249f4.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7b36eabc.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>在Express应用中，我们可以按照Controller-Service-Mapper的结构来设计我们的应用。
+以下是一个简单的步骤：</p></div> <ol><li>创建Controller：Controller负责处理HTTP请求和响应。它将请求转发给Service。</li> <li>创建Service：Service负责处理业务逻辑。它从Controller接收请求，处理业务逻辑，然后将结果返回给Controller。</li> <li>创建Mapper：Mapper负责与数据库交互。它从Service接收请求，执行数据库操作，然后将结果返回给Service。</li></ol> <div class="language-javascript extra-class"><pre class="language-javascript"><code>
+<span class="token comment">// controller.js</span>
+<span class="token keyword">const</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'express'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> router <span class="token operator">=</span> express<span class="token punctuation">.</span><span class="token function">Router</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> userService <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./service'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+router<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/user/:id'</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token keyword">await</span> userService<span class="token punctuation">.</span><span class="token function">getUser</span><span class="token punctuation">(</span>req<span class="token punctuation">.</span>params<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> router<span class="token punctuation">;</span>
+
+<span class="token comment">// service.js</span>
+<span class="token keyword">const</span> userMapper <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./mapper'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">getUser</span><span class="token punctuation">(</span><span class="token parameter">id</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">await</span> userMapper<span class="token punctuation">.</span><span class="token function">getUser</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span> getUser <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">// mapper.js</span>
+<span class="token keyword">const</span> db <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./db'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">getUser</span><span class="token punctuation">(</span><span class="token parameter">id</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">await</span> db<span class="token punctuation">.</span><span class="token function">query</span><span class="token punctuation">(</span><span class="token string">'SELECT * FROM users WHERE id = ?'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span> getUser <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">总结</p> <p>在这个示例中，我们创建了一个Controller，它接收HTTP请求并将其转发给Service。Service处理业务逻辑并将请求转发给Mapper。Mapper执行数据库操作并将结果返回给Service，然后Service将结果返回给Controller，最后Controller将结果返回给客户端。</p></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.91780537.js" defer></script><script src="/assets/js/2.f70e48b2.js" defer></script><script src="/assets/js/7.e82e331d.js" defer></script>
+  </body>
+</html>

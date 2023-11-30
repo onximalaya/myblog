@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Class类组件及生命周期</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="">
+    
+    <link rel="preload" href="/assets/css/0.styles.7b36eabc.css" as="style"><link rel="preload" href="/assets/js/app.91780537.js" as="script"><link rel="preload" href="/assets/js/2.f70e48b2.js" as="script"><link rel="preload" href="/assets/js/14.aa931e1a.js" as="script"><link rel="prefetch" href="/assets/js/10.f6b1a0da.js"><link rel="prefetch" href="/assets/js/11.4e164f96.js"><link rel="prefetch" href="/assets/js/12.ffd7221e.js"><link rel="prefetch" href="/assets/js/13.b5ca6aca.js"><link rel="prefetch" href="/assets/js/15.239e276f.js"><link rel="prefetch" href="/assets/js/16.84170c7f.js"><link rel="prefetch" href="/assets/js/17.c3e6e487.js"><link rel="prefetch" href="/assets/js/18.df3d02c1.js"><link rel="prefetch" href="/assets/js/19.7c5d58ac.js"><link rel="prefetch" href="/assets/js/20.45e3f97a.js"><link rel="prefetch" href="/assets/js/21.69c419c8.js"><link rel="prefetch" href="/assets/js/22.3d39bd35.js"><link rel="prefetch" href="/assets/js/23.85fa1c40.js"><link rel="prefetch" href="/assets/js/24.95f75d81.js"><link rel="prefetch" href="/assets/js/25.f8d6e0c5.js"><link rel="prefetch" href="/assets/js/26.f268d4d1.js"><link rel="prefetch" href="/assets/js/27.abb292df.js"><link rel="prefetch" href="/assets/js/3.1f7c1ef3.js"><link rel="prefetch" href="/assets/js/4.bd52c4e3.js"><link rel="prefetch" href="/assets/js/5.530b0be1.js"><link rel="prefetch" href="/assets/js/6.dc32384f.js"><link rel="prefetch" href="/assets/js/7.e82e331d.js"><link rel="prefetch" href="/assets/js/8.5d832cc1.js"><link rel="prefetch" href="/assets/js/9.9d6249f4.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7b36eabc.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="class类组件"><a href="#class类组件" class="header-anchor">#</a> Class类组件</h1> <p>说明：类组件就是通过js中的类来组织组件的代码</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code>Class Counter extend Component<span class="token punctuation">{</span>
+    
+    state <span class="token operator">=</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">count</span><span class="token operator">:</span><span class="token number">0</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token function-variable function">clickHandle</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+            <span class="token literal-property property">count</span><span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>count<span class="token operator">+</span><span class="token number">1</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>
+            <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>clickHandle<span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>count<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token number">1.</span>通过类组件属性state定义数据
+<span class="token number">2.</span>通过setState方法修改状态数据
+<span class="token number">3.</span>通过render方法来写<span class="token constant">UI</span>模版（<span class="token constant">JSX</span>语法一致）
+
+</code></pre></div><h1 id="类组件的生命周期"><a href="#类组件的生命周期" class="header-anchor">#</a> 类组件的生命周期</h1> <p>constructor</p> <p>render</p> <p>componentDidMount 组件挂载完自动执行 - 发起异步数据请求</p> <p>componentDidUpdate</p> <p>componentWillUnMount 组件卸载时自动执行 - 清除副作用</p></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.91780537.js" defer></script><script src="/assets/js/2.f70e48b2.js" defer></script><script src="/assets/js/14.aa931e1a.js" defer></script>
+  </body>
+</html>

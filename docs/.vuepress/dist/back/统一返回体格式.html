@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>统一返回体格式</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="">
+    
+    <link rel="preload" href="/assets/css/0.styles.7b36eabc.css" as="style"><link rel="preload" href="/assets/js/app.91780537.js" as="script"><link rel="preload" href="/assets/js/2.f70e48b2.js" as="script"><link rel="preload" href="/assets/js/10.f6b1a0da.js" as="script"><link rel="prefetch" href="/assets/js/11.4e164f96.js"><link rel="prefetch" href="/assets/js/12.ffd7221e.js"><link rel="prefetch" href="/assets/js/13.b5ca6aca.js"><link rel="prefetch" href="/assets/js/14.aa931e1a.js"><link rel="prefetch" href="/assets/js/15.239e276f.js"><link rel="prefetch" href="/assets/js/16.84170c7f.js"><link rel="prefetch" href="/assets/js/17.c3e6e487.js"><link rel="prefetch" href="/assets/js/18.df3d02c1.js"><link rel="prefetch" href="/assets/js/19.7c5d58ac.js"><link rel="prefetch" href="/assets/js/20.45e3f97a.js"><link rel="prefetch" href="/assets/js/21.69c419c8.js"><link rel="prefetch" href="/assets/js/22.3d39bd35.js"><link rel="prefetch" href="/assets/js/23.85fa1c40.js"><link rel="prefetch" href="/assets/js/24.95f75d81.js"><link rel="prefetch" href="/assets/js/25.f8d6e0c5.js"><link rel="prefetch" href="/assets/js/26.f268d4d1.js"><link rel="prefetch" href="/assets/js/27.abb292df.js"><link rel="prefetch" href="/assets/js/3.1f7c1ef3.js"><link rel="prefetch" href="/assets/js/4.bd52c4e3.js"><link rel="prefetch" href="/assets/js/5.530b0be1.js"><link rel="prefetch" href="/assets/js/6.dc32384f.js"><link rel="prefetch" href="/assets/js/7.e82e331d.js"><link rel="prefetch" href="/assets/js/8.5d832cc1.js"><link rel="prefetch" href="/assets/js/9.9d6249f4.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7b36eabc.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>在Express中，你可以创建一个中间件来封装统一的数据格式。这个中间件可以接收一个数据对象和一个可选的错误对象，然后返回一个统一格式的响应对象。以下是一个简单的示例：</p></div> <div class="language-javascript extra-class"><pre class="language-javascript"><code>
+<span class="token keyword">function</span> <span class="token function">responseHandler</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  res<span class="token punctuation">.</span><span class="token function-variable function">sendData</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      <span class="token literal-property property">success</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">data</span><span class="token operator">:</span> data
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  res<span class="token punctuation">.</span><span class="token function-variable function">sendError</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">error<span class="token punctuation">,</span> statusCode <span class="token operator">=</span> <span class="token number">500</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span>statusCode<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      <span class="token literal-property property">success</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">error</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">message</span><span class="token operator">:</span> error<span class="token punctuation">.</span>message<span class="token punctuation">,</span>
+        <span class="token literal-property property">stack</span><span class="token operator">:</span> error<span class="token punctuation">.</span>stack
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> responseHandler<span class="token punctuation">;</span>
+
+</code></pre></div><p>::: theorem 说明
+在这个示例中，<code>responseHandler</code>中间件添加了两个新的方法到res对象：sendData和sendError。sendData方法接收一个数据对象并返回一个成功的响应，sendError方法接收一个错误对象和一个可选的HTTP状态码，并返回一个错误的响应。
+你可以在你的应用中使用这个中间件，然后在你的路由和中间件中使用res.sendData和res.sendError来发送统一格式的响应。例如：
+:::</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code>
+<span class="token keyword">const</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'express'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> responseHandler <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./responseHandler'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> userService <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./service'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>responseHandler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/user/:id'</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token keyword">await</span> userService<span class="token punctuation">.</span><span class="token function">getUser</span><span class="token punctuation">(</span>req<span class="token punctuation">.</span>params<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    res<span class="token punctuation">.</span><span class="token function">sendData</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    res<span class="token punctuation">.</span><span class="token function">sendError</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Server started on port 3000'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>在这个示例中，如果userService.getUser成功，我们会使用res.sendData发送一个包含用户数据的响应，否则，我们会使用res.sendError发送一个包含错误信息的响应。</p></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.91780537.js" defer></script><script src="/assets/js/2.f70e48b2.js" defer></script><script src="/assets/js/10.f6b1a0da.js" defer></script>
+  </body>
+</html>

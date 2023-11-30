@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>react状态管理</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="">
+    
+    <link rel="preload" href="/assets/css/0.styles.7b36eabc.css" as="style"><link rel="preload" href="/assets/js/app.91780537.js" as="script"><link rel="preload" href="/assets/js/2.f70e48b2.js" as="script"><link rel="preload" href="/assets/js/17.c3e6e487.js" as="script"><link rel="prefetch" href="/assets/js/10.f6b1a0da.js"><link rel="prefetch" href="/assets/js/11.4e164f96.js"><link rel="prefetch" href="/assets/js/12.ffd7221e.js"><link rel="prefetch" href="/assets/js/13.b5ca6aca.js"><link rel="prefetch" href="/assets/js/14.aa931e1a.js"><link rel="prefetch" href="/assets/js/15.239e276f.js"><link rel="prefetch" href="/assets/js/16.84170c7f.js"><link rel="prefetch" href="/assets/js/18.df3d02c1.js"><link rel="prefetch" href="/assets/js/19.7c5d58ac.js"><link rel="prefetch" href="/assets/js/20.45e3f97a.js"><link rel="prefetch" href="/assets/js/21.69c419c8.js"><link rel="prefetch" href="/assets/js/22.3d39bd35.js"><link rel="prefetch" href="/assets/js/23.85fa1c40.js"><link rel="prefetch" href="/assets/js/24.95f75d81.js"><link rel="prefetch" href="/assets/js/25.f8d6e0c5.js"><link rel="prefetch" href="/assets/js/26.f268d4d1.js"><link rel="prefetch" href="/assets/js/27.abb292df.js"><link rel="prefetch" href="/assets/js/3.1f7c1ef3.js"><link rel="prefetch" href="/assets/js/4.bd52c4e3.js"><link rel="prefetch" href="/assets/js/5.530b0be1.js"><link rel="prefetch" href="/assets/js/6.dc32384f.js"><link rel="prefetch" href="/assets/js/7.e82e331d.js"><link rel="prefetch" href="/assets/js/8.5d832cc1.js"><link rel="prefetch" href="/assets/js/9.9d6249f4.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7b36eabc.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="react状态管理"><a href="#react状态管理" class="header-anchor">#</a> react状态管理</h1> <ul><li>redux
+使用步骤：
+1.定义一个reducer函数（根据当前想要做的修改返回一个新的状态）
+2.使用createStore方法传入reducer函数，生成一个store实例对象
+3.使用store实例的subscribe方法订阅数据的变化，（数据一旦变化，可以得到通知）
+4.使用store实例的dispatch方法提交action对象，触发数据变化（告诉reducer你想怎么改数据）
+5.使用store实例的getState方法获取最新的状态数据更新到视图上</li></ul> <p>为了职能清晰，数据流向明确，Redux把整个数据修改流程分为了三个核心概念，分别是state，action和reducer</p> <ol><li>state  一个对象，存放着我们管理的数据状态</li> <li>action 一个对象，用来描述你想怎么改数据</li> <li>reducer 一个函数，根据action的描述生成一个新的state</li></ol> <p>在react中使用redux，官方推荐可以搭配两个工具使用 redux-Toolkit和react-redux</p> <p>Redux-Toolkit是官方推荐书写Redux逻辑的方式，是一套工具的集合集，简化书写方式</p> <p>优点：</p> <ol><li>简化store的配置，</li> <li>内置immer支持可变式状态修改</li> <li>内置chunk更好的异步创建</li></ol> <p>react-redux是用来连接Redux和React组件的中间件,可以获取状态更新状态
+redux-DevTools调试redux的工具</p> <p>react-redux
+zustand</p> <h1 id="usereducer"><a href="#usereducer" class="header-anchor">#</a> useReducer</h1> <p>作用：与useState类似，用来管理相对复杂的状态数据
+基础用法：
+1.定义一个reducer函数(根据不同的action返回不同的新状态)
+2.在组件中调用useReducer，并传入reducer函数和状态的初始值
+3.事件发生时，通过dispatch函数分派一个action对象，（通知reducer函数要返回哪个新状态并渲染UI）</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">function</span> <span class="token function">reducer</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span>action</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">//根据不同的action.type 返回新的state</span>
+    <span class="token keyword">switch</span><span class="token punctuation">(</span>action<span class="token punctuation">.</span>type<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">case</span> <span class="token string">'INC'</span><span class="token operator">:</span>
+            <span class="token keyword">return</span> state<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token string">'DES'</span><span class="token operator">:</span>
+            <span class="token keyword">return</span> state<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token string">'SET'</span><span class="token operator">:</span>
+            <span class="token keyword">return</span> action<span class="token punctuation">.</span>payload<span class="token punctuation">;</span>
+        <span class="token keyword">default</span><span class="token operator">:</span>
+            <span class="token keyword">return</span> state
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">[</span>state<span class="token punctuation">,</span>dispatch<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useReducer</span><span class="token punctuation">(</span>reducer<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span>
+
+<span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token literal-property property">action</span><span class="token operator">:</span><span class="token string">'INC'</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token literal-property property">action</span><span class="token operator">:</span><span class="token string">'SET'</span><span class="token punctuation">,</span><span class="token literal-property property">payload</span><span class="token operator">:</span><span class="token number">10</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.91780537.js" defer></script><script src="/assets/js/2.f70e48b2.js" defer></script><script src="/assets/js/17.c3e6e487.js" defer></script>
+  </body>
+</html>
