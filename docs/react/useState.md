@@ -112,7 +112,10 @@ function App(){
     )
 }
 ```
+php -S localhost:8080 -t ./
 
+git config --global user.name 你的用户名，        //设置全局用户名。
+git config --global user.email 你的登陆邮箱，     //设置邮箱。
 
 
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
