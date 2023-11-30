@@ -102,3 +102,8 @@ yarn dev
 
 ## License
 [MIT](https://github.com/recoluan/vuepress-theme-reco/blob/master/LICENSE)
+
+
+## 图片引入方式
+第一种万能引入： <img :src="$withBase('/express/mac1.png')">
+第二种打包后可能路径不符 [VuePress Logo](/express/mac1.png)

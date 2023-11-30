@@ -2,6 +2,8 @@ module.exports = {
   title: "记录",
   description: 'A simple and beautiful vuepress blog theme .',
   base:'/myblog/dist/',
+  //    发布到github pages 配置/myblog/dist/
+  //    发布到自己的服务器配置 ./
   dest: './dist',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
